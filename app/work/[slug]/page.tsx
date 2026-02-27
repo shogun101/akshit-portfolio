@@ -8,6 +8,7 @@ export function generateStaticParams() {
   ]
 }
 
-export default function CaseStudy({ params }: { params: { slug: string } }) {
-  return <CaseStudyClient slug={params.slug} />
+export default async function CaseStudy({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  return <CaseStudyClient slug={slug} />
 }
