@@ -218,23 +218,24 @@ export default function Home() {
                     },
                   },
                 }}
-                className="group relative flex items-center h-[40.5px] cursor-pointer"
+                className="group relative flex items-start md:items-center min-h-[52px] md:h-[40.5px] py-2 md:py-0 cursor-pointer"
               >
                 {/* Hover background */}
                 <div className="absolute inset-x-[-12px] inset-y-0 rounded-[6px] bg-black/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
 
                 {/* Date */}
-                <span className="relative z-10 w-[108px] shrink-0 text-[13.9px] font-medium tracking-[-0.09px] text-black/40">
+                <span className="relative z-10 w-[108px] shrink-0 text-[13.9px] font-medium tracking-[-0.09px] text-black/40 self-start md:self-auto pt-[2px] md:pt-0">
                   {exp.date}
                 </span>
 
-                {/* Name */}
-                <span className="relative z-10 text-[14px] font-medium tracking-[-0.09px] text-[#111]">
+                {/* Name + description wrapper */}
+                <span className="relative z-10 flex flex-col md:flex-row md:items-center md:flex-1">
+                <span className="text-[14px] font-medium tracking-[-0.09px] text-[#111]">
                   {exp.name}
                 </span>
 
-                {/* Description or logos — pushed to the right */}
-                <span className="relative z-10 ml-auto flex items-center gap-2">
+                {/* Description or logos */}
+                <span className="md:ml-auto flex items-center gap-2 mt-0.5 md:mt-0">
                   {exp.logos ? (
                     <>
                       <span className="text-[13.8px] font-medium tracking-[-0.09px] text-black/40">
@@ -265,6 +266,7 @@ export default function Home() {
                       {exp.description}
                     </span>
                   )}
+                </span>
                 </span>
 
                 {/* Bottom border */}

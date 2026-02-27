@@ -16,21 +16,37 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
   const controls = useAnimationControls();
   const [isHovered, setIsHovered] = useState(false);
 
+  // Responsive image size — mobile gets smaller, desktop unchanged
+  const [imgSize, setImgSize] = useState({ w: 747, h: 420 });
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 768) {
+        setImgSize({ w: 300, h: 169 });
+      } else {
+        setImgSize({ w: 747, h: 420 });
+      }
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const mobileGap = typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : gap;
+
   useEffect(() => {
     if (containerRef.current) {
       const scrollWidth = containerRef.current.scrollWidth / 2;
       setWidth(scrollWidth);
     }
-  }, [images]);
+  }, [images, imgSize]);
 
   useEffect(() => {
     if (width === 0) return;
-
     if (isHovered) {
       controls.stop();
     } else {
       controls.start({
-        x: [-0, -width],
+        x: [0, -width],
         transition: {
           x: {
             repeat: Infinity,
@@ -44,6 +60,7 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
   }, [isHovered, width, speed, controls]);
 
   const allImages = [...images, ...images];
+  const gapValue = imgSize.w === 747 ? gap : 20;
 
   return (
     <div
@@ -55,7 +72,7 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
         ref={containerRef}
         className="flex"
         animate={controls}
-        style={{ gap }}
+        style={{ gap: gapValue }}
       >
         {allImages.map((img, i) => (
           <div
@@ -63,14 +80,14 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
             className={`relative shrink-0 rounded-[4px] overflow-hidden ${
               img.border ? "border border-[#f2f2f2]" : ""
             }`}
-            style={{ width: 747, height: 420 }}
+            style={{ width: imgSize.w, height: imgSize.h }}
           >
             <Image
               src={img.src}
               alt={img.alt}
               fill
               className="object-cover"
-              sizes="747px"
+              sizes={`${imgSize.w}px`}
             />
           </div>
         ))}
