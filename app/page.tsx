@@ -12,12 +12,14 @@ const experiments = [
     name: "BrandSprint",
     description: "Brand Workshops powered by AI",
     href: "#",
+    year: 2026,
   },
   {
     date: "JAN '26",
     name: "Prompt Archive",
     description: "Brand Components",
     href: "#",
+    year: 2026,
   },
   {
     date: "IN 2025",
@@ -29,12 +31,14 @@ const experiments = [
       { src: "/images/instadapp.png", alt: "Instadapp" },
     ],
     href: "#",
+    year: 2025,
   },
   {
     date: "2024",
     name: "Velar",
     description: "Lead Designer",
     href: "#",
+    year: 2024,
   },
 ];
 
@@ -269,10 +273,14 @@ export default function Home() {
                 </span>
                 </span>
 
-                {/* Bottom border */}
-                {i < experiments.length - 1 && (
-                  <span className="absolute bottom-0 left-[108px] right-0 h-px bg-[#f2f2f2]" />
-                )}
+                {/* Bottom border — full width on year change, indented within same year */}
+                {i < experiments.length - 1 && (() => {
+                  const nextYear = experiments[i + 1].year;
+                  const sameYear = exp.year === nextYear;
+                  return (
+                    <span className={`absolute bottom-0 right-0 h-px bg-[#f2f2f2] ${sameYear ? "left-[108px]" : "left-0"}`} />
+                  );
+                })()}
               </motion.a>
             ))}
           </motion.div>
