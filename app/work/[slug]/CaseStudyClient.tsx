@@ -1,40 +1,65 @@
 'use client'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
-import { InView } from '@/components/motion-primitives/in-view'
 
-function PlaceholderImage() {
+function InView({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.3 })
   return (
-    <InView
-      variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 10 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+      transition={{ duration: 0.6, ease: 'easeOut', delay }}
     >
-      <div className="w-full aspect-video rounded-sm" style={{ background: 'var(--surface)' }} />
-    </InView>
+      {children}
+    </motion.div>
   )
 }
 
-export default function CaseStudyClient({ title, oneliner }: { title: string; oneliner: string }) {
+export default function CaseStudyClient({ slug }: { slug: string }) {
+  const title = slug.replace(/-/g, ' ')
   return (
-    <main className="max-w-2xl mx-auto px-6 py-16">
-      <Link href="/" className="text-sm transition-opacity hover:opacity-60 inline-block mb-12" style={{ color: 'var(--text-secondary)' }}>
-        ← Back
-      </Link>
-      <h1 className="text-4xl md:text-6xl tracking-tight mb-4" style={{ color: 'var(--text-primary)' }}>
-        {title}
-      </h1>
-      <p className="text-lg mb-16" style={{ color: 'var(--text-secondary)' }}>{oneliner}</p>
-      <PlaceholderImage />
-      <div className="mt-16 space-y-16">
-        {['Problem', 'Process', 'Outcome'].map((section) => (
-          <section key={section}>
-            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--text-secondary)' }}>{section}</p>
-            <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-              [Placeholder — Akshit to fill in]
-            </p>
-            {section === 'Process' && <div className="mt-8"><PlaceholderImage /></div>}
-          </section>
-        ))}
+    <div className="min-h-screen w-full flex justify-center bg-white selection:bg-gray-100 selection:text-black">
+      <div className="w-full max-w-[640px] px-6 py-12 md:py-[64px] pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.4 }}
+          className="pt-4"
+        >
+          <Link
+            href="/"
+            className="mb-8 text-[#737373] hover:text-[#111111] transition-colors flex items-center gap-2 text-sm group"
+            style={{ display: 'inline-flex' }}
+          >
+            <span className="group-hover:-translate-x-1 transition-transform inline-block">←</span>
+            {' '}Back
+          </Link>
+
+          <h1 className="text-xl md:text-2xl font-medium text-[#111111] mb-2 capitalize mt-8">
+            {title}
+          </h1>
+          <p className="text-[#737373] text-base mb-12">Product Design, Strategy</p>
+
+          <InView delay={0.2}>
+            <div className="w-full h-64 bg-gray-50 border border-[#E5E5E5] rounded flex items-center justify-center text-[#737373] mb-8 text-sm">
+              Case study coming soon.
+            </div>
+          </InView>
+
+          <InView delay={0.3}>
+            <div className="space-y-4 text-[#111111] leading-relaxed text-[15px]">
+              <p>This is a placeholder for the case study content. The request specified that the content area should just be placeholder text for now.</p>
+              <div className="h-4 bg-gray-50 rounded w-3/4"></div>
+              <div className="h-4 bg-gray-50 rounded w-full"></div>
+              <div className="h-4 bg-gray-50 rounded w-5/6"></div>
+            </div>
+          </InView>
+        </motion.div>
       </div>
-    </main>
+    </div>
   )
 }
