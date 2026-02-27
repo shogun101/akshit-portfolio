@@ -1,8 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 // TextEffect — exact from HTML
 function TextEffect({ text, className }: { text: string; className?: string }) {
@@ -76,7 +74,7 @@ function ExperimentRow({ item }: { item: typeof experimentsData[0] }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={`/work/${item.slug}`}>
+      <div>
         {/* Desktop */}
         <div className="hidden md:grid grid-cols-[80px_1fr_auto] items-center py-3 text-[14px]">
           <div className="text-[#737373] tabular-nums">{item.year}</div>
@@ -101,7 +99,7 @@ function ExperimentRow({ item }: { item: typeof experimentsData[0] }) {
             <span>{item.date}</span>
           </div>
         </div>
-      </Link>
+      </div>
     </motion.div>
   )
 }
