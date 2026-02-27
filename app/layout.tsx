@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Agentation } from 'agentation'
 import PageTransition from './components/PageTransition'
 import './globals.css'
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PageTransition>
           {children}
         </PageTransition>
+        <Agentation />
       </body>
     </html>
   )
