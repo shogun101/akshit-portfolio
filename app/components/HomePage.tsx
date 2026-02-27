@@ -156,8 +156,8 @@ function LogoBox({
   return (
     <div className="relative group">
       <motion.div
-        className="w-full md:w-auto md:px-4 h-[40px] md:h-[48px] border rounded flex items-center justify-center cursor-default bg-white relative z-10"
-        style={{ borderColor: isHovered ? '#111111' : '#E5E5E5', minWidth: '88px' }}
+        className="px-4 py-2 border rounded-md flex items-center justify-center cursor-default bg-white relative z-10 whitespace-nowrap"
+        style={{ borderColor: isHovered ? '#111111' : '#E5E5E5' }}
         animate={{ opacity: isDimmed ? 0.4 : 1 }}
         transition={{ duration: 0.15 }}
         onMouseEnter={() => setHoveredIndex(index)}
@@ -193,7 +193,7 @@ function Collaborations() {
         <span className="text-[13px] text-[#737373]">Collaborated with</span>
         <span className="text-[13px] text-[#737373]">2021 – 2025</span>
       </div>
-      <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3">
+      <div className="flex flex-wrap gap-2">
         {collabItems.map((item, i) => (
           <LogoBox key={item.id} item={item} index={i} hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} />
         ))}
@@ -211,12 +211,12 @@ export default function HomePage() {
         <div className="mb-1">
           <TextEffect
             text="Akshit Vrma"
-            className="text-[15px] font-semibold text-[#111111] leading-tight"
+            className="text-[18px] font-semibold text-[#111111] leading-tight"
           />
         </div>
 
         {/* Updated date */}
-        <div className="text-[13px] text-[#737373] mb-10">
+        <div className="text-[13px] text-[#737373] mb-8">
           Updated Feb 27, 2026
         </div>
 
@@ -264,7 +264,7 @@ export default function HomePage() {
                 className="hover:text-[#111111] transition-colors">
                 x.com/akshitvrma
               </a>
-              <span className="opacity-30">/</span>
+              <span className="opacity-30">|</span>
               <a href="mailto:akshit@gloww.design"
                 className="hover:text-[#111111] transition-colors">
                 akshit@gloww.design
