@@ -21,7 +21,7 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
   useEffect(() => {
     const update = () => {
       if (window.innerWidth < 768) {
-        setImgSize({ w: 300, h: 169 });
+        setImgSize({ w: 427, h: 240 });
       } else {
         setImgSize({ w: 747, h: 420 });
       }
