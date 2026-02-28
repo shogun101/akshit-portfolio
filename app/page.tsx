@@ -43,9 +43,10 @@ const experiments = [
 ];
 
 const marqueeImages = [
-  { src: "/images/project-1.png", alt: "Trading interface", border: false },
-  { src: "/images/project-2.png", alt: "Velar DEX", border: true },
-  { src: "/images/project-3.png", alt: "Colorful design", border: false },
+  { src: "/images/project-1.png", alt: "Project 1", border: false },
+  { src: "/images/project-2.png", alt: "Project 2", border: false },
+  { src: "/images/project-3.png", alt: "Project 3", border: false },
+  { src: "/images/project-4.png", alt: "Project 4", border: false },
 ];
 
 const stagger = {
