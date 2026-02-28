@@ -158,7 +158,7 @@ export default function Home() {
 
           <div className="text-[14px] font-medium leading-[20px] tracking-[-0.09px] text-[#111]">
             <TextEffect per="word" preset="fade-in-blur" delay={0.7} speedReveal={0.02} speedSegment={0.4}>
-              I consider myself a designer at heart and enjoy building highly polished products.
+              Design is just where I start. I do whatever it takes to ship something truly polished, and I keep pushing this craft every day.
             </TextEffect>
           </div>
 
