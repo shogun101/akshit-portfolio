@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useAnimationControls } from "framer-motion";
+import { motion, useAnimationControls, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
@@ -14,9 +14,9 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
   const [width, setWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const controls = useAnimationControls();
+  const x = useMotionValue(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Responsive image size — mobile gets smaller, desktop unchanged
   const [imgSize, setImgSize] = useState({ w: 747, h: 420 });
   useEffect(() => {
     const update = () => {
@@ -31,8 +31,6 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
     return () => window.removeEventListener('resize', update);
   }, []);
 
-  const mobileGap = typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : gap;
-
   useEffect(() => {
     if (containerRef.current) {
       const scrollWidth = containerRef.current.scrollWidth / 2;
@@ -42,22 +40,36 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
 
   useEffect(() => {
     if (width === 0) return;
+
     if (isHovered) {
       controls.stop();
     } else {
+      // Resume from current x position
+      const currentX = x.get();
+      const remaining = -width - currentX;
+      const remainingDuration = Math.abs(remaining) / speed;
+
       controls.start({
-        x: [0, -width],
+        x: [currentX, -width],
         transition: {
-          x: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: width / speed,
-            ease: "linear",
+          duration: remainingDuration,
+          ease: "linear",
+          onComplete: () => {
+            // Loop from 0 after first segment completes
+            controls.start({
+              x: [0, -width],
+              transition: {
+                duration: width / speed,
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "loop",
+              },
+            });
           },
         },
       });
     }
-  }, [isHovered, width, speed, controls]);
+  }, [isHovered, width, speed]);
 
   const allImages = [...images, ...images];
   const gapValue = imgSize.w === 747 ? gap : 20;
@@ -72,7 +84,7 @@ export function Marquee({ images, speed = 40, gap = 48 }: MarqueeProps) {
         ref={containerRef}
         className="flex"
         animate={controls}
-        style={{ gap: gapValue }}
+        style={{ gap: gapValue, x }}
       >
         {allImages.map((img, i) => (
           <div
