@@ -133,7 +133,7 @@ export default function Home() {
             <TextEffect per="word" preset="fade-in-blur" delay={0.3} speedReveal={0.03} speedSegment={0.4}>
               I design interfaces with care and document them on my
             </TextEffect>{" "}
-            <HighlightLink href="https://twitter.com" underline="/images/underline-twitter.svg">
+            <HighlightLink href="https://twitter.com/akshitvrma" underline="/images/underline-twitter.svg">
               <TextEffect per="word" preset="fade-in-blur" delay={0.6} speedReveal={0.03} speedSegment={0.4}>
                 Twitter
               </TextEffect>
@@ -167,7 +167,7 @@ export default function Home() {
             <TextEffect per="word" preset="fade-in-blur" delay={0.85} speedReveal={0.02} speedSegment={0.4}>
               I&apos;m probably tinkering with my agent right now. If you want to get in touch, DM me on
             </TextEffect>{" "}
-            <HighlightLink href="https://t.me" underline="/images/underline-telegram.svg">
+            <HighlightLink href="https://t.me/akshitvrma" underline="/images/underline-telegram.svg">
               <TextEffect per="word" preset="fade-in-blur" delay={1.1} speedReveal={0.02} speedSegment={0.4}>
                 Telegram
               </TextEffect>
