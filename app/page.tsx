@@ -11,14 +11,14 @@ const experiments = [
     date: "FEB '26",
     name: "BrandSprint",
     description: "Brand Workshops powered by AI",
-    href: "#",
+    href: "https://brandsprint.app",
     year: 2026,
   },
   {
     date: "JAN '26",
     name: "Prompt Archive",
     description: "Brand Components",
-    href: "#",
+    href: "https://promptarchive.co",
     year: 2026,
   },
   {
@@ -30,14 +30,14 @@ const experiments = [
       { src: "/images/degen.png", alt: "Degen" },
       { src: "/images/instadapp.png", alt: "Instadapp" },
     ],
-    href: "#",
+    href: "https://gloww.design",
     year: 2025,
   },
   {
     date: "2024",
     name: "Velar",
     description: "Lead Designer",
-    href: "#",
+    href: "https://x.com/AkshitVrma/status/1894391236326559984",
     year: 2024,
   },
 ];
@@ -223,6 +223,8 @@ export default function Home() {
                     },
                   },
                 }}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative flex items-start md:items-center min-h-[52px] md:h-[40.5px] py-2 md:py-0 cursor-pointer"
               >
                 {/* Hover background */}
